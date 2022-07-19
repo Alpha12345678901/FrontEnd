@@ -1,13 +1,21 @@
+
 <template>
   <div class="home">
-<div id="myBoard" style="width: 400px"></div>
+  <chessboard/>
+<div id="board1" style="width: 1000px"></div>
   </div>
 </template>
 <script>
-    import { Chess } from 'chess.js'
-    const chess = new Chess()
-    console.log(chess.ascii())
+import ChessBoard from "chessboardjs-vue3";
 export default {
+mounted(){
+            ChessBoard('board1', {
+                config: {
+                    pieceTheme: '@/wikipedia',
+                    position: 'start'
+                }
+            });
+        },
   name: 'HomeView',
 }
 </script>
