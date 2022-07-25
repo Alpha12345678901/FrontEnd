@@ -1,8 +1,11 @@
 import {chessboard} from 'vue-chessboard'
 import 'vue-chessboard/dist/vue-chessboard.css'
 <template>
-  <div class="about">
-    <chessboard/>
-    <h1>This is an about page</h1>
-  </div>
+<form>
+  <label for="fname">Username:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Password:</label>
+  <input type="text" id="lname" name="lname"><br><br>
+  <input type="submit" value="Signup">
+  </form>
 </template>
