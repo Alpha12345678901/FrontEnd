@@ -3,9 +3,13 @@
   <p class="error" v-if="errMsg">{{ errMsg }}</p>
   <p><input type="text" placeholder="Email" v-model="email" /></p>
   <p><input type="password" placeholder="Password" v-model="password" /></p>
-  <p><button @click="signIn">Sign In</button></p>
-  <p><button @click="register">Register</button></p>
-  <p><button @click="signInWithGoogle">Sign In With Google</button></p>
+  <p><button class="button is-primary" @click="signIn">Sign In</button></p>
+  <p><button class="button is-primary" @click="register">Register</button></p>
+  <p>
+    <button class="button is-primary" @click="signInWithGoogle">
+      Sign In With Google
+    </button>
+  </p>
 </template>
 <script setup>
 import { ref } from "vue";

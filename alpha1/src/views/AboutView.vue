@@ -1,11 +1,34 @@
-import {chessboard} from 'vue-chessboard'
-import 'vue-chessboard/dist/vue-chessboard.css'
+import {chessboard} from 'vue-chessboard' import
+'vue-chessboard/dist/vue-chessboard.css'
 <template>
-<form>
   <label for="fname">Username:</label>
-  <input type="text" id="fname" name="fname"><br><br>
+  <input type="text" id="fname" name="fname" /><br /><br />
   <label for="lname">Password:</label>
-  <input type="text" id="lname" name="lname"><br><br>
-  <input type="submit" value="Signup">
-  </form>
+  <input type="text" id="lname" name="lname" /><br /><br />
+  <input type="submit" value="Signup" />
+  <input type="text" id="lname" name="lname" v-model="id" /><br /><br />
+  <p><button class="button is-primary" @click="join">Register</button></p>
+  <p><button class="button is-primary" @click="creat">Register</button></p>
 </template>
+<script setup>
+import { io } from "socket.io-client";
+import { ref } from "vue";
+const id = ref("");
+
+const socket = io("http://localhost:3000");
+socket.on("connect", () => {
+  console.log("HI");
+});
+const join = () => {
+  socket.on("connect", () => {
+    socket.emit("join", id.value);
+  });
+};
+const creat = () => {
+  socket.emit("creat", socket.id);
+  console.log(socket.id);
+};
+socket.on("HI", () => {
+  console.log("HI");
+});
+</script>
