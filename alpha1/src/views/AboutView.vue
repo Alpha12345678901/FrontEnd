@@ -20,9 +20,7 @@ socket.on("connect", () => {
   console.log("HI");
 });
 const join = () => {
-  socket.on("connect", () => {
-    socket.emit("join", id.value);
-  });
+  socket.emit("join", id.value);
 };
 const creat = () => {
   socket.emit("creat", socket.id);
