@@ -35,7 +35,7 @@ const register = () => {
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(getAuth(), provider).then(() => {
-    router.push("/home");
+    router.push("/User");
   });
 };
 const signIn = () => {
