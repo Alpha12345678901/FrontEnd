@@ -80,7 +80,8 @@ game.move({
         promotion: 'q' // NOTE: always promote to a queen for example simplicity
       })
 
-      board.position(game.fen())
+      board.position(game.fen());
+   console.log(game.fen());
  });
 function onDrop (source, target) {
       socket.emit("move",{Source:source, Target:target, RoomID:permID})

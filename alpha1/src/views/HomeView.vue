@@ -4,12 +4,33 @@
   <chessboard/>
   <div id="myBoard" style="width: 1000px"></div>
   </div>
+  <ul>
+       <li v-for="ai in AI" :key="ai">{{ai}} </li>
+   </ul>
+   <input type="text" v-bind="CurrentAI">
 </template>
 <script>
 import ChessBoard from "chessboardjs-vue3";
 import { Chess } from 'chess.js'
+import axios from 'axios';
+import { io } from "socket.io-client";
 export default {
+data() {
+    return {
+      file:"",
+      message:"",
+      CurrentAi:"jonklo2002-AI1.py",
+      AI:[],
+      socket:null
+    }
+  },
+
 mounted() {
+    axios.get('http://localhost:3000/ListAllAI').then((data)=>{
+              this.AI=data.data.AI;
+      console.log(this.AI);
+          })
+   var socket=io("http://localhost:3000");
     var board = null
     var game = new Chess()
 
@@ -23,6 +44,7 @@ mounted() {
       //logs to make vue shut up about unused variables
       console.log(position)
       console.log(orientation)
+      console.log(this.CurrentAI);
     }
 
     function makeRandomMove () {
@@ -31,9 +53,18 @@ mounted() {
       // game over
       if (possibleMoves.length === 0) return
 
-      var randomIdx = Math.floor(Math.random() * possibleMoves.length)
-      game.move(possibleMoves[randomIdx])
+      console.log(socket);
+      socket.emit("moveAI",{AIName:"jonklo2002-AI1.py",Game:game.fen()});
+      socket.on("MoveMade", params=>{
+        console.log(params);
+        game.move({
+        from: params.substring(0,2),
+        to: params.substring(2,4),
+        promotion: 'q' // NOTE: always promote to a queen for example simplicity
+      })
+
       board.position(game.fen())
+      })
     }
 
     function onDrop (source, target) {
@@ -70,3 +101,4 @@ mounted() {
   name: 'HomeView',
 }
 </script>
+<style lang="sass" src="bulma" scoped></style>
