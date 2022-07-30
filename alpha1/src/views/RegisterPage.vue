@@ -25,15 +25,18 @@ const email = ref("");
 const password = ref("");
 const router = useRouter();
 const errMsg = ref();
+ //vairiables
 const register = () => {
   createUserWithEmailAndPassword(getAuth(), email.value, password.value).then(
     () => {
+      //sign in with email and password
       router.push("/home");
     }
   );
 };
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
+   //sign in with google
   signInWithPopup(getAuth(), provider).then(() => {
     router.push("/User");
   });
@@ -59,6 +62,7 @@ const signIn = () => {
           break;
       }
     });
+   //error check
 };
 </script>
 

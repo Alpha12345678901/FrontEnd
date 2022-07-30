@@ -25,6 +25,7 @@ var board = null;
 var game = new Chess();
 var orient=""
 const socket = io("http://localhost:3000");
+ //socket events
 socket.on("connect", () => {
   console.log("HI");
 });
